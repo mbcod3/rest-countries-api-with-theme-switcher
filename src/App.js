@@ -5,6 +5,7 @@ import Home from "./Home";
 import { Switch, Route } from "react-router-dom";
 import CountryPage from './CountryPage';
 import { CountriesProvider } from "./CountriesContext";
+import { RegionProvider } from "./RegionContext";
 
 function App() {
   return (
@@ -13,12 +14,14 @@ function App() {
         <Navbar />
         <Switch>
           <CountriesProvider>
+            <RegionProvider>
             <Route exact path="/country/:name">
               <CountryPage />
             </Route>
             <Route exact path="/">
-              <Home />
+                <Home />
             </Route>
+            </RegionProvider>
           </CountriesProvider>
         </Switch>
       </ThemeProvider>

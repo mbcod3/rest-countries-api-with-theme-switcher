@@ -24,6 +24,7 @@ export function CountriesProvider(props) {
     .catch(err => {
       alert(err)
     })
+    return () => console.log('out')
   }, [])
 
   return (

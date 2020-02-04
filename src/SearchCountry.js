@@ -1,14 +1,16 @@
 import React, {useState, useContext, useRef, useEffect} from 'react'
 import { CountriesContext } from "./CountriesContext";
 import TextField from "@material-ui/core/TextField";
+import {RegionContext} from './RegionContext'
 
-export default function SearchCountry({regionState}) {
+export default function SearchCountry() {
 
   const [searchString, setSearchString] = useState('')
 
   const [countries, setCountries] = useContext(CountriesContext);
 
-  const {region, setRegion} = regionState
+  const [region, setRegion] = useContext(RegionContext);
+
   const regionRef = useRef(region)
 
   useEffect( ()=> {
@@ -36,7 +38,6 @@ export default function SearchCountry({regionState}) {
 
       if (searchString.length < e.target.value.length) {
         searchedCountries = filterCountries(countries[region])
-        console.log('op')
       } else {  //when backspace on search input
         searchedCountries = filterCountries(countries[regionRef.current])
       } 
