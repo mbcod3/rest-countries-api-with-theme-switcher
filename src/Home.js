@@ -1,71 +1,79 @@
-import React, { useState, useContext, useEffect, useRef} from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { ThemeContext } from "./DarkThemeContext";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from '@material-ui/core/MenuItem';
 import CountryCard from "./CountryCard";
 import { CountriesContext } from "./CountriesContext";
 import SearchCountry from "./SearchCountry";
-import {RegionContext} from './RegionContext'
+import { RegionContext } from "./RegionContext";
+import colors from "./colors";
+import FilterRegion from "./FilterRegion";
 
+const useStyles = makeStyles({
+  root: {
+    paddingTop: '50px',
+    position: "relative",
+    color: theme => (theme ? colors.dt : colors.lt),
+    "&::after": {
+      content: "''",
+      position: "absolute",
+      zIndex: -2,
+      width: "100%",
+      height: "100%",
+      top: 0,
+      left: 0,
+      background: theme => (theme ? colors.db : colors.lb),
+      margin: "0 -999rem",
+      padding: "0 999rem",
+    },
+  },
+  inputsContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+});
 
 export default function Home() {
   const [theme] = useContext(ThemeContext);
 
   const [countries] = useContext(CountriesContext);
 
-  const [region, setRegion] = useContext(RegionContext);
-  const regionRef = useRef(region)
+  const [region] = useContext(RegionContext);
 
-  const [items, setItems] = useState(16)
-  
+  const [items, setItems] = useState(16);
+
+  const classes = useStyles(theme);
+
   useEffect(() => {
     function handleScroll() {
-      if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight
+      )
+        return;
       if (items + 16 <= countries[region].length) {
-        setItems(items => items + 16)
+        setItems(items => items + 16);
       } else {
-        setItems(items => items + (countries[region].length - items) )
+        setItems(items => items + (countries[region].length - items));
       }
     }
-    window.addEventListener('scroll', handleScroll);
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [countries, items, region]);
 
-
-  const handleSelectChange = (e) => {
-    setRegion(e.target.value)
-    setItems(16)
-    regionRef.current = e.target.value
-  };
-
-  const regions = ['All', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
-
   return (
-    <div>
-      <div>
+    <div className={classes.root}>
+      <div className={classes.inputsContainer}>
         <SearchCountry />
-        <TextField
-          id="filled-select-currency"
-          select
-          label="Filter by Region"
-          value={regionRef.current}
-          onChange={handleSelectChange}
-          helperText="Please select your currency"
-          variant="filled"
-        >
-          {regions.map(option => (
-            <MenuItem key={option} value={option}>
-              {option}
-            </MenuItem>
-          ))}
-        </TextField>
+        <FilterRegion setItems={setItems}/>
       </div>
       <div>
-        {region && countries[region].slice(0, items).map(country => (
-          <CountryCard country={country} key={country.name} />
-        ))}
+        {region &&
+          countries[region]
+            .slice(0, items)
+            .map(country => (
+              <CountryCard country={country} key={country.name} />
+            ))}
       </div>
     </div>
   );

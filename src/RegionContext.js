@@ -8,7 +8,6 @@ export function RegionProvider(props) {
 
   useEffect(() => {
     setRegion('All')
-    console.log('reg')
   }, [])
   return (
     <RegionContext.Provider value={[region, setRegion]}>

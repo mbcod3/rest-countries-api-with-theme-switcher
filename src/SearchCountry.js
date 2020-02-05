@@ -1,9 +1,42 @@
 import React, {useState, useContext, useRef, useEffect} from 'react'
 import { CountriesContext } from "./CountriesContext";
 import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
 import {RegionContext} from './RegionContext'
+import { ThemeContext } from "./DarkThemeContext";
+import colors from "./colors";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import InputAdornment from '@material-ui/core/InputAdornment';
 
+const useStyles = makeStyles({
+  search: {
+    width: '470px',
+    boxShadow: theme => `0 0 7px ${theme ? 'rgba(0,0,0,.2)' : 'rgba(0,0,0,.05)'}`,
+    '& .MuiInputBase-root': {
+      background: theme => (theme ? colors.de : colors.le),
+      color: theme => (theme ? colors.dt : colors.li),
+      '&::before':{
+        border: 'none'
+      },
+      '&::after': {
+        border: 'none'
+      }
+    },
+    '& .MuiFormLabel-root': {
+      color: theme => (theme ? colors.dt : colors.li)
+    },
+  },
+  icon: {
+    color: theme => (theme ? colors.dt : colors.li),
+    
+  }
+})
+console.log(<FontAwesomeIcon icon={faSearch} />)
 export default function SearchCountry() {
+
+  const [theme] = useContext(ThemeContext);
+
 
   const [searchString, setSearchString] = useState('')
 
@@ -12,6 +45,8 @@ export default function SearchCountry() {
   const [region, setRegion] = useContext(RegionContext);
 
   const regionRef = useRef(region)
+
+  const classes = useStyles(theme)
 
   useEffect( ()=> {
     if (region !== 'Searched') regionRef.current = region
@@ -58,6 +93,10 @@ export default function SearchCountry() {
           variant="filled"
           value={searchString}
           onChange={handleSearchChange} 
+          className={classes.search}
+          InputProps={{
+            endAdornment: <InputAdornment position="end"><FontAwesomeIcon icon={faSearch} className={classes.icon} /></InputAdornment>,
+          }}
         />
     </div>
   )
