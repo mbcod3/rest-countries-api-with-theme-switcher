@@ -8,24 +8,23 @@ export function CountriesProvider(props) {
     All: []
   })
 
-  useEffect(() => {
-    axios.get('https://restcountries.eu/rest/v2/all')
-    .then((data) => {
-      setCountries({
-        All: data.data,
-        Africa: data.data.filter(country => country.region === "Africa"),
-        Americas: data.data.filter(country => country.region === "Americas"),
-        Asia: data.data.filter(country => country.region === "Asia"),
-        Europe: data.data.filter(country => country.region === "Europe"),
-        Oceania: data.data.filter(country => country.region === "Oceania"),
-        Searched: []
-      })
-    })
-    .catch(err => {
-      alert(err)
-    })
-    return () => console.log('out')
-  }, [])
+  // useEffect(() => {
+  //   axios.get('https://restcountries.eu/rest/v2/all')
+  //   .then((data) => {
+  //     setCountries({
+  //       All: data.data,
+  //       Africa: data.data.filter(country => country.region === "Africa"),
+  //       Americas: data.data.filter(country => country.region === "Americas"),
+  //       Asia: data.data.filter(country => country.region === "Asia"),
+  //       Europe: data.data.filter(country => country.region === "Europe"),
+  //       Oceania: data.data.filter(country => country.region === "Oceania"),
+  //       Searched: []
+  //     })
+  //   })
+  //   .catch(err => {
+  //     alert(err)
+  //   })
+  // }, [])
 
   return (
     <CountriesContext.Provider value={[countries, setCountries]}>

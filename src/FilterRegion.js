@@ -11,9 +11,13 @@ const useStyles = makeStyles({
     width: "200px",
     boxShadow: theme =>
       `0 0 7px ${theme ? "rgba(0,0,0,.2)" : "rgba(0,0,0,.05)"}`,
-    "& .MuiInputBase-root": {
-      background: theme => (theme ? colors.de : colors.le),
-      color: theme => (theme ? colors.dt : colors.li),
+      "& .MuiFormLabel-root": {
+        color: theme => (theme ? colors.dt : colors.lt),
+        marginLeft: '10px'
+      },
+      "& .MuiInputBase-root": {
+        background: theme => (theme ? colors.de : colors.le),
+        color: theme => (theme ? colors.dt : colors.lt),
       "&::before": {
         border: "none",
       },
@@ -21,17 +25,21 @@ const useStyles = makeStyles({
         border: "none",
       },
     },
-    "& .MuiFormLabel-root": {
-      color: theme => (theme ? colors.dt : colors.li),
+    '& .MuiSelect-root': {
+      paddingLeft: '21px'
     },
-    "& .MuiList-root": {
-      color: theme => (theme ? colors.dt : colors.li),
-    },
+    '& .MuiSvgIcon-root': {
+      right: '12px',
+      color: theme => (theme ? colors.dt : colors.lt),
+    }
   },
   selectPaper: {
     background: theme => (theme ? colors.de : colors.le),
-    color: theme => (theme ? colors.dt : colors.li),
+    color: theme => (theme ? colors.dt : colors.lt),
     top: "185px !important",
+    "& .MuiListItem-root": {
+        paddingLeft: '22px !important'
+    },
   },
 });
 

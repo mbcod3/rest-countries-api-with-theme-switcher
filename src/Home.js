@@ -1,18 +1,19 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { ThemeContext } from "./DarkThemeContext";
+import { CountriesContext } from "./CountriesContext";
+import { RegionContext } from "./RegionContext";
 import { makeStyles } from "@material-ui/core/styles";
 import CountryCard from "./CountryCard";
-import { CountriesContext } from "./CountriesContext";
 import SearchCountry from "./SearchCountry";
-import { RegionContext } from "./RegionContext";
-import colors from "./colors";
 import FilterRegion from "./FilterRegion";
+import colors from "./colors";
 
 const useStyles = makeStyles({
   root: {
     paddingTop: '50px',
     position: "relative",
     color: theme => (theme ? colors.dt : colors.lt),
+    minHeight: '85vh',
     "&::after": {
       content: "''",
       position: "absolute",

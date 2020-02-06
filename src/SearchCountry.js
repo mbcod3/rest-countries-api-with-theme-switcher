@@ -7,12 +7,17 @@ import { ThemeContext } from "./DarkThemeContext";
 import colors from "./colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import InputAdornment from '@material-ui/core/InputAdornment';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
-  search: {
-    width: '470px',
+  root: {
+    width: 'auto',
+    alignItems: 'center !important',
     boxShadow: theme => `0 0 7px ${theme ? 'rgba(0,0,0,.2)' : 'rgba(0,0,0,.05)'}`,
+    margin: '0 !important'
+  },
+  search: {
+    width: '450px',
     '& .MuiInputBase-root': {
       background: theme => (theme ? colors.de : colors.le),
       color: theme => (theme ? colors.dt : colors.li),
@@ -24,15 +29,25 @@ const useStyles = makeStyles({
       }
     },
     '& .MuiFormLabel-root': {
-      color: theme => (theme ? colors.dt : colors.li)
+      color: theme => (theme ? colors.dt : colors.li),
     },
+  },
+  iconGrid: {
+    height: '56px',
+    padding: '0 !important'
   },
   icon: {
     color: theme => (theme ? colors.dt : colors.li),
-    
+    height: '100%',
+    paddingLeft: '20px',
+    paddingRight: '15px',
+    background: theme => (theme ? colors.de : colors.le),
+  },
+  inputGrid: {
+    padding: '0 !important'
   }
 })
-console.log(<FontAwesomeIcon icon={faSearch} />)
+
 export default function SearchCountry() {
 
   const [theme] = useContext(ThemeContext);
@@ -86,18 +101,20 @@ export default function SearchCountry() {
   };
 
   return (
-    <div>
-      <TextField
+    <Grid container spacing={1} alignItems="flex-end" className={classes.root}>
+      <Grid item className={classes.iconGrid}>
+        <FontAwesomeIcon icon={faSearch} className={classes.icon} />
+      </Grid>
+      <Grid item className={classes.inputGrid}>
+        <TextField
           id="filled-basic"
           label="Search for a country..."
           variant="filled"
           value={searchString}
           onChange={handleSearchChange} 
           className={classes.search}
-          InputProps={{
-            endAdornment: <InputAdornment position="end"><FontAwesomeIcon icon={faSearch} className={classes.icon} /></InputAdornment>,
-          }}
         />
-    </div>
+      </Grid>
+    </Grid>
   )
 }
