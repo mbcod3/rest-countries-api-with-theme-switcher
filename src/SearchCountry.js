@@ -42,13 +42,14 @@ const useStyles = makeStyles({
     paddingLeft: '20px',
     paddingRight: '15px',
     background: theme => (theme ? colors.de : colors.le),
+    transition: 'background 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms'
   },
   inputGrid: {
     padding: '0 !important'
   }
 })
 
-export default function SearchCountry() {
+export default function SearchCountry({setItems}) {
 
   const [theme] = useContext(ThemeContext);
 
@@ -80,6 +81,8 @@ export default function SearchCountry() {
 
     if (e.target.value.length === 0) {
       setRegion(regionRef.current)
+      window.sessionStorage.setItem('items', JSON.stringify(16))
+      setItems(16)
       setCountries(state => ({
         ...state,
         Searched: []

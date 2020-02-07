@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "./DarkThemeContext";
 import { CountriesContext } from "./CountriesContext";
 import { RegionContext } from "./RegionContext";
@@ -13,7 +13,8 @@ const useStyles = makeStyles({
     paddingTop: '50px',
     position: "relative",
     color: theme => (theme ? colors.dt : colors.lt),
-    minHeight: '85vh',
+    minHeight: "calc(100vh - 152px)",
+    paddingBottom: '30px',
     "&::after": {
       content: "''",
       position: "absolute",
@@ -25,12 +26,19 @@ const useStyles = makeStyles({
       background: theme => (theme ? colors.db : colors.lb),
       margin: "0 -999rem",
       padding: "0 999rem",
+      transition: 'background 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms'
     },
   },
   inputsContainer: {
     display: "flex",
     justifyContent: "space-between",
   },
+  countriesContainer: {
+    marginTop: '50px',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gap: '75px'
+  }
 });
 
 export default function Home() {
@@ -40,9 +48,17 @@ export default function Home() {
 
   const [region] = useContext(RegionContext);
 
-  const [items, setItems] = useState(16);
+  const [items, setItems] = useState(() => (
+    JSON.parse(window.sessionStorage.getItem('items') || 16) 
+  ));
 
   const classes = useStyles(theme);
+
+  useEffect(() => {
+    window.sessionStorage.setItem('items', JSON.stringify(16))
+
+    return () => window.sessionStorage.setItem('items', JSON.stringify(16))
+  }, [])
 
   useEffect(() => {
     function handleScroll() {
@@ -52,9 +68,13 @@ export default function Home() {
       )
         return;
       if (items + 16 <= countries[region].length) {
+        window.sessionStorage.setItem('items', JSON.stringify(items + 16))
         setItems(items => items + 16);
+        document.documentElement.scrollTop += 600
       } else {
+        window.sessionStorage.setItem('items', JSON.stringify(items + (countries[region].length - items)))
         setItems(items => items + (countries[region].length - items));
+        document.documentElement.scrollTop += 600
       }
     }
     window.addEventListener("scroll", handleScroll);
@@ -65,10 +85,10 @@ export default function Home() {
   return (
     <div className={classes.root}>
       <div className={classes.inputsContainer}>
-        <SearchCountry />
+        <SearchCountry setItems={setItems}/>
         <FilterRegion setItems={setItems}/>
       </div>
-      <div>
+      <div className={classes.countriesContainer}>
         {region &&
           countries[region]
             .slice(0, items)

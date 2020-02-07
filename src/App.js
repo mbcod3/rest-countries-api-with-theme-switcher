@@ -17,10 +17,12 @@ const useStyles = makeStyles({
   "@global": {
     html: {
       overflowX: 'hidden',
+      scrollBehavior: 'smooth'
     },
     body: {
       overflowX: 'hidden',
       fontFamily: "Nunito Sans, sans serif",
+      paddingRight: '0 !important'
     },
     '.container': {
       maxWidth: '100%',
@@ -39,6 +41,12 @@ const useStyles = makeStyles({
       },
       '@media (min-width: 1200px)': {
         maxWidth: '1140px',
+      },
+      '@media (min-width: 1400px)': {
+        maxWidth: '1300px'
+      },
+      '@media (min-width: 1600px)': {
+        maxWidth: '1400px'
       }
     },
     'img-fluid': {
