@@ -68,10 +68,19 @@ export default function Home() {
   const [region] = useContext(RegionContext);
 
   const [items, setItems] = useState(() => (
-    JSON.parse(window.sessionStorage.getItem('items') || 16) 
+    JSON.parse(window.sessionStorage.getItem('items') || calcItems()) 
   ));
 
   const classes = useStyles(theme);
+
+  function calcItems() {
+    let itemN;
+    if (window.innerWidth < 576) itemN = 4
+    else if (window.innerWidth < 768) itemN = 8
+    else if (window.innerWidth < 1200) itemN = 12
+    else itemN = 16
+    return itemN
+  }
 
   useEffect(() => {
     function handleScroll() {
@@ -81,8 +90,8 @@ export default function Home() {
       )
         return;
       if (items + 16 <= countries[region].length) {
-        window.sessionStorage.setItem('items', JSON.stringify(items + 16))
-        setItems(items => items + 16);
+        window.sessionStorage.setItem('items', JSON.stringify(items + calcItems()))
+        setItems(items => items + calcItems());
         document.documentElement.scrollTop += 600
       } else {
         window.sessionStorage.setItem('items', JSON.stringify(items + (countries[region].length - items)))

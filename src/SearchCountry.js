@@ -73,7 +73,10 @@ export default function SearchCountry({setItems}) {
   const classes = useStyles(theme)
 
   useEffect( ()=> {
-    if (region !== 'Searched') regionRef.current = region
+    if (region !== 'Searched') {
+      regionRef.current = region
+      setSearchString('')
+    }
   },[region])
 
   const handleSearchChange = e => {

@@ -52,73 +52,73 @@ const useStyles = makeStyles({
   content: {
     display: "flex",
     alignItems: "center",
-    justifyContent: 'space-between',
-    '@media(max-width:992px)': {
-      flexDirection: 'column'
-    }
+    justifyContent: "space-between",
+    "@media(max-width:992px)": {
+      flexDirection: "column",
+    },
   },
   flag: {
-    width: '560px',
-    height: 'auto',
-    maxWidth: '100%',
-    '@media(max-width:1400px)': {
-      width: '520px'
+    width: "560px",
+    height: "auto",
+    maxWidth: "100%",
+    "@media(max-width:1400px)": {
+      width: "520px",
     },
-    '@media(max-width:1200px)': {
-      width: '475px'
+    "@media(max-width:1200px)": {
+      width: "475px",
     },
-    '@media(max-width:992px)': {
-      width: '560px',
-      marginBottom: '50px'
+    "@media(max-width:992px)": {
+      width: "560px",
+      marginBottom: "50px",
     },
   },
   countryContainer: {
-    width: '575px',
-    maxWidth: '100%',
-    '@media(max-width:1400px)': {
-      width: '475px'
+    width: "575px",
+    maxWidth: "100%",
+    "@media(max-width:1400px)": {
+      width: "475px",
     },
-    '@media(max-width:1200px)': {
-      width: '420px'
+    "@media(max-width:1200px)": {
+      width: "420px",
     },
-    '@media(max-width:992px)': {
-      width: '560px',
-    }
+    "@media(max-width:992px)": {
+      width: "560px",
+    },
   },
   countryInfoContainer: {
     display: "flex",
-    justifyContent: 'space-between',
-    marginBottom: '20px',
-    '@media(max-width:576px)': {
-      flexDirection: 'column'
-    }
+    justifyContent: "space-between",
+    marginBottom: "20px",
+    "@media(max-width:576px)": {
+      flexDirection: "column",
+    },
   },
   borderContainer: {
-    display: 'inline-flex',
-    flexWrap: 'wrap',
-    alignItems: 'center'
+    display: "inline-flex",
+    flexWrap: "wrap",
+    alignItems: "center",
   },
   borderTag: {
-    fontWeight: 800, 
-    marginBottom: '10px',
-    display: 'inline-block'
+    fontWeight: 800,
+    marginBottom: "10px",
+    display: "inline-block",
   },
   border: {
-    padding: '5px 24px',
-    borderRadius: '3px',
-    marginRight: '10px',
-    background: theme => theme ? colors.de : '',
+    padding: "5px 24px",
+    borderRadius: "3px",
+    marginRight: "10px",
+    background: theme => (theme ? colors.de : ""),
     boxShadow: theme =>
       `0 0 7px ${theme ? "rgba(0,0,0,.4)" : "rgba(0,0,0,.1)"}`,
-    marginBottom: '10px' 
-  }
+    marginBottom: "10px",
+  },
 });
 
 export default function CountryPage() {
   const [countries] = useContext(CountriesContext);
   const [theme] = useContext(ThemeContext);
 
-  const {goBack} = useHistory()
+  const { goBack } = useHistory();
 
   const { name } = useParams();
   const country = countries["All"].filter(country => country.name === name);
@@ -126,9 +126,11 @@ export default function CountryPage() {
   const classes = useStyles(theme);
 
   const borderCountry = abbr => {
-    const name = countries["All"].filter(country => country.alpha3Code === abbr)
-    return name[0].name
-  }
+    const name = countries["All"].filter(
+      country => country.alpha3Code === abbr
+    );
+    return name[0].name;
+  };
   return (
     <div className={classes.root}>
       <button className={classes.btn} onClick={goBack}>
@@ -136,7 +138,7 @@ export default function CountryPage() {
         Back
       </button>
       <div className={classes.content}>
-        <img src={country[0].flag} alt="flag" className={classes.flag}/>
+        <img src={country[0].flag} alt="flag" className={classes.flag} />
         <div className={classes.countryContainer}>
           <h2>{country[0].name}</h2>
           <div className={classes.countryInfoContainer}>
@@ -147,7 +149,10 @@ export default function CountryPage() {
               </p>
               <p>
                 <span style={{ fontWeight: 800 }}>Population: </span>
-                {`${country[0].population}`.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}
+                {`${country[0].population}`.replace(
+                  /(\d)(?=(\d\d\d)+(?!\d))/g,
+                  "$1,"
+                )}
               </p>
               <p>
                 <span style={{ fontWeight: 800 }}>Region: </span>
@@ -174,7 +179,9 @@ export default function CountryPage() {
               <p>
                 <span style={{ fontWeight: 800 }}>Languages: </span>
                 {country[0].languages.map((language, i, arr) => (
-                  <span key={i}>{`${language.name}${i === arr.length - 1 ? '' : ', '}`}</span>
+                  <span key={i}>{`${language.name}${
+                    i === arr.length - 1 ? "" : ", "
+                  }`}</span>
                 ))}
               </p>
             </div>
@@ -182,9 +189,15 @@ export default function CountryPage() {
           <div>
             <span className={classes.borderTag}>Border Countries: &nbsp;</span>
             <div className={classes.borderContainer}>
-              {country[0].borders.length ? country[0].borders.map((border, i) => (
-                <span className={classes.border} key={i}>{borderCountry(border)}</span>
-              )) : <span style={{marginBottom: '10px'}}> None</span>}
+              {country[0].borders.length ? (
+                country[0].borders.map((border, i) => (
+                  <span className={classes.border} key={i}>
+                    {borderCountry(border)}
+                  </span>
+                ))
+              ) : (
+                <span style={{ marginBottom: "10px" }}> None</span>
+              )}
             </div>
           </div>
         </div>

@@ -42,7 +42,7 @@ const useStyles = makeStyles({
   cardContent: {
     color: theme => (theme ? colors.dt : colors.lt),
     padding: '22px',
-    paddingBottom: '36px',
+    paddingBottom: '40px',
     textDecoration: 'none',
     '@media(max-width: 575px)': {
       padding: '40px',
