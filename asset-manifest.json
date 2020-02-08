@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/rest-countries-api-with-theme-switcher/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/rest-countries-api-with-theme-switcher/static/js/main.0143f93f.chunk.js",
-    "main.js.map": "/rest-countries-api-with-theme-switcher/static/js/main.0143f93f.chunk.js.map",
+    "main.js": "/rest-countries-api-with-theme-switcher/static/js/main.9b4bcbfb.chunk.js",
+    "main.js.map": "/rest-countries-api-with-theme-switcher/static/js/main.9b4bcbfb.chunk.js.map",
     "runtime-main.js": "/rest-countries-api-with-theme-switcher/static/js/runtime-main.0f55a7bb.js",
     "runtime-main.js.map": "/rest-countries-api-with-theme-switcher/static/js/runtime-main.0f55a7bb.js.map",
     "static/js/2.71c92afc.chunk.js": "/rest-countries-api-with-theme-switcher/static/js/2.71c92afc.chunk.js",
     "static/js/2.71c92afc.chunk.js.map": "/rest-countries-api-with-theme-switcher/static/js/2.71c92afc.chunk.js.map",
     "index.html": "/rest-countries-api-with-theme-switcher/index.html",
-    "precache-manifest.2bf57d4388ecd935c065c9052741259d.js": "/rest-countries-api-with-theme-switcher/precache-manifest.2bf57d4388ecd935c065c9052741259d.js",
+    "precache-manifest.a22e48ff53a0fe030c82eb674fcee4b5.js": "/rest-countries-api-with-theme-switcher/precache-manifest.a22e48ff53a0fe030c82eb674fcee4b5.js",
     "service-worker.js": "/rest-countries-api-with-theme-switcher/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/rest-countries-api-with-theme-switcher/static/css/main.5ecd60fb.chunk.css.map",
     "static/js/2.71c92afc.chunk.js.LICENSE.txt": "/rest-countries-api-with-theme-switcher/static/js/2.71c92afc.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.0f55a7bb.js",
     "static/js/2.71c92afc.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.0143f93f.chunk.js"
+    "static/js/main.9b4bcbfb.chunk.js"
   ]
 }
