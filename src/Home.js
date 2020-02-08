@@ -32,12 +32,31 @@ const useStyles = makeStyles({
   inputsContainer: {
     display: "flex",
     justifyContent: "space-between",
+    '@media(max-width:768px)': {
+      flexDirection: 'column'
+    }
   },
   countriesContainer: {
     marginTop: '50px',
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 1fr)',
-    gap: '75px'
+    gap: '75px',
+    '@media(max-width:1599px)': {
+      gap: '50px'
+    },
+    '@media(max-width:1200px)': {
+      gridTemplateColumns: 'repeat(3,1fr)'
+    },
+    '@media(max-width:992px)': {
+      gap: '25px'
+    },
+    '@media(max-width: 768px)': {
+      gridTemplateColumns: 'repeat(2,1fr)',
+    },
+    '@media(max-width: 575px)': {
+      gridTemplateColumns: '1fr',
+      rowGap: '75px'
+    }
   }
 });
 
@@ -53,12 +72,6 @@ export default function Home() {
   ));
 
   const classes = useStyles(theme);
-
-  useEffect(() => {
-    window.sessionStorage.setItem('items', JSON.stringify(16))
-
-    return () => window.sessionStorage.setItem('items', JSON.stringify(16))
-  }, [])
 
   useEffect(() => {
     function handleScroll() {

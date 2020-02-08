@@ -11,13 +11,20 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
   root: {
-    width: 'auto',
+    width: '450px',
     alignItems: 'center !important',
+    flexWrap: 'nowrap',
     boxShadow: theme => `0 0 7px ${theme ? 'rgba(0,0,0,.2)' : 'rgba(0,0,0,.05)'}`,
-    margin: '0 !important'
+    margin: '0 !important',
+    '@media(max-width:992px)': {
+      width: '401px',
+    },
+    '@media(max-width:768px)': {
+      marginBottom: '30px !important',
+      maxWidth: '100%'
+    }
   },
   search: {
-    width: '450px',
     '& .MuiInputBase-root': {
       background: theme => (theme ? colors.de : colors.le),
       color: theme => (theme ? colors.dt : colors.li),
@@ -45,7 +52,8 @@ const useStyles = makeStyles({
     transition: 'background 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms'
   },
   inputGrid: {
-    padding: '0 !important'
+    padding: '0 !important',
+    width: '100%'
   }
 })
 
@@ -104,11 +112,11 @@ export default function SearchCountry({setItems}) {
   };
 
   return (
-    <Grid container spacing={1} alignItems="flex-end" className={classes.root}>
+    <Grid container spacing={1} className={classes.root}>
       <Grid item className={classes.iconGrid}>
         <FontAwesomeIcon icon={faSearch} className={classes.icon} />
       </Grid>
-      <Grid item className={classes.inputGrid}>
+      <Grid item className={classes.inputGrid}> 
         <TextField
           id="filled-basic"
           label="Search for a country..."
@@ -116,6 +124,7 @@ export default function SearchCountry({setItems}) {
           value={searchString}
           onChange={handleSearchChange} 
           className={classes.search}
+          fullWidth
         />
       </Grid>
     </Grid>

@@ -46,7 +46,7 @@ const useStyles = makeStyles({
         maxWidth: '1300px'
       },
       '@media (min-width: 1600px)': {
-        maxWidth: '1400px'
+        maxWidth: '1380px'
       }
     },
     'img-fluid': {

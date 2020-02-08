@@ -40,6 +40,9 @@ const useStyles = makeStyles({
     "& .MuiListItem-root": {
         paddingLeft: '22px !important'
     },
+    '@media(max-width:768px)': {
+      top: '270px !important'
+    }
   },
 });
 

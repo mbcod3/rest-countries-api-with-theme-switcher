@@ -16,10 +16,20 @@ const useStyles = makeStyles({
     transition: 'background 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms',
     boxShadow: theme =>
       `0 0 7px ${theme ? "rgba(0,0,0,.2)" : "rgba(0,0,0,.05)"}`,
-    
+    '@media(max-width: 575px)': {
+      width: '450px',
+      justifySelf: 'center',
+      maxWidth: '100%'
+    },
+    '@media(max-width: 480px)': {
+      width: '100%'
+    }
   },
   media: {
-    height: 160
+    height: 160,
+    '@media(max-width: 575px)': {
+      height: 250
+    }
   },
   cardArea: {
     '& .MuiCardActionArea-focusHighlight': {
@@ -34,11 +44,23 @@ const useStyles = makeStyles({
     padding: '22px',
     paddingBottom: '36px',
     textDecoration: 'none',
+    '@media(max-width: 575px)': {
+      padding: '40px',
+      paddingBottom: '70px',
+      '& p': {
+        fontSize: '20px',
+        marginBottom: '10px'
+      }
+    }
   },
   cardTitle: {
     fontSize: '22px',
     fontWeight: 800,
-    textDecoration: 'none !important'
+    textDecoration: 'none !important',
+    '@media(max-width: 575px)': {
+      fontSize: '28px',
+      marginBottom: '28px'
+    }
   },
   infoTag: {
     fontWeight: 600,

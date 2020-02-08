@@ -52,28 +52,60 @@ const useStyles = makeStyles({
   content: {
     display: "flex",
     alignItems: "center",
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    '@media(max-width:992px)': {
+      flexDirection: 'column'
+    }
   },
   flag: {
     width: '560px',
-    height: '400px',
+    height: 'auto',
     maxWidth: '100%',
+    '@media(max-width:1400px)': {
+      width: '520px'
+    },
+    '@media(max-width:1200px)': {
+      width: '475px'
+    },
+    '@media(max-width:992px)': {
+      width: '560px',
+      marginBottom: '50px'
+    },
+  },
+  countryContainer: {
+    width: '575px',
+    maxWidth: '100%',
+    '@media(max-width:1400px)': {
+      width: '475px'
+    },
+    '@media(max-width:1200px)': {
+      width: '420px'
+    },
+    '@media(max-width:992px)': {
+      width: '560px',
+    }
   },
   countryInfoContainer: {
     display: "flex",
-  },
-  countryInfo1: {
-    marginRight: '120px'
+    justifyContent: 'space-between',
+    marginBottom: '20px',
+    '@media(max-width:576px)': {
+      flexDirection: 'column'
+    }
   },
   borderContainer: {
-    display: 'flex',
+    display: 'inline-flex',
     flexWrap: 'wrap',
-    alignItems: 'center',
-    maxWidth: '575px',
-    width: '100%',
+    alignItems: 'center'
+  },
+  borderTag: {
+    fontWeight: 800, 
+    marginBottom: '10px',
+    display: 'inline-block'
   },
   border: {
-    padding: '7px 14px',
+    padding: '5px 24px',
+    borderRadius: '3px',
     marginRight: '10px',
     background: theme => theme ? colors.de : '',
     boxShadow: theme =>
@@ -105,10 +137,10 @@ export default function CountryPage() {
       </button>
       <div className={classes.content}>
         <img src={country[0].flag} alt="flag" className={classes.flag}/>
-        <div>
+        <div className={classes.countryContainer}>
           <h2>{country[0].name}</h2>
           <div className={classes.countryInfoContainer}>
-            <div className={classes.countryInfo1}>
+            <div>
               <p>
                 <span style={{ fontWeight: 800 }}>Native Name: </span>
                 {country[0].nativeName}
@@ -130,7 +162,7 @@ export default function CountryPage() {
                 {country[0].capital}
               </p>
             </div>
-            <div className={classes.countryInfo2}>
+            <div>
               <p>
                 <span style={{ fontWeight: 800 }}>Top Level Domain: </span>
                 {country[0].topLevelDomain}
@@ -147,13 +179,13 @@ export default function CountryPage() {
               </p>
             </div>
           </div>
-          <div style={{marginTop: '45px'}}>
-            <p className={classes.borderContainer}>
-              <span style={{ fontWeight: 800, marginBottom: '10px' }}>Border Countries: &nbsp;</span>
+          <div>
+            <span className={classes.borderTag}>Border Countries: &nbsp;</span>
+            <div className={classes.borderContainer}>
               {country[0].borders.length ? country[0].borders.map((border, i) => (
                 <span className={classes.border} key={i}>{borderCountry(border)}</span>
               )) : <span style={{marginBottom: '10px'}}> None</span>}
-            </p>
+            </div>
           </div>
         </div>
       </div>
