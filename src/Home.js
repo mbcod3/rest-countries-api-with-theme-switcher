@@ -92,12 +92,16 @@ export default function Home() {
       if (items + 16 <= countries[region].length) {
         window.sessionStorage.setItem('items', JSON.stringify(items + calcItems()))
         setItems(items => items + calcItems());
-        document.documentElement.scrollTop += 600
       } else {
         window.sessionStorage.setItem('items', JSON.stringify(items + (countries[region].length - items)))
         setItems(items => items + (countries[region].length - items));
-        document.documentElement.scrollTop += 600
       }
+      
+      document.documentElement.scroll({
+        top: document.documentElement.scrollTop + 600,
+        left: 0,
+        behavior: 'smooth'
+      })
     }
     window.addEventListener("scroll", handleScroll);
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { CountriesContext } from "./CountriesContext";
 import { useParams, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
@@ -6,7 +6,7 @@ import colors from "./colors";
 import { ThemeContext } from "./DarkThemeContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
-
+import ScrollToTopOnMount from './ScrollToTopOnMount'
 const useStyles = makeStyles({
   root: {
     paddingTop: "50px",
@@ -125,14 +125,21 @@ export default function CountryPage() {
 
   const classes = useStyles(theme);
 
+  
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
+
   const borderCountry = abbr => {
     const name = countries["All"].filter(
       country => country.alpha3Code === abbr
     );
     return name[0].name;
   };
+
   return (
     <div className={classes.root}>
+      <ScrollToTopOnMount />
       <button className={classes.btn} onClick={goBack}>
         <FontAwesomeIcon icon={faLongArrowAltLeft} />
         Back

@@ -17,7 +17,6 @@ const useStyles = makeStyles({
   "@global": {
     html: {
       overflowX: 'hidden',
-      scrollBehavior: 'smooth'
     },
     body: {
       overflowX: 'hidden',
